@@ -1,3 +1,4 @@
+//Order item js
 function outputOrderItems() {
     let order_item_section = document.getElementById("order_items");
     let total_price = document.getElementById("total_price");
