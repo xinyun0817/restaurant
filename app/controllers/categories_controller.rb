@@ -1,3 +1,4 @@
+#categories controller
 class CategoriesController < ApplicationController
   layout "admin"
   before_action :authenticate_admin
