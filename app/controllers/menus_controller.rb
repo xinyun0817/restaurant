@@ -1,3 +1,4 @@
+#menus controller
 class MenusController < ApplicationController
   layout "admin"
   before_action :authenticate_admin

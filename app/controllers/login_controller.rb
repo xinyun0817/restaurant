@@ -1,3 +1,4 @@
+#login controller
 class LoginController < ApplicationController
   
   def new
