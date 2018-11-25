@@ -1,3 +1,4 @@
+//Menu item js
 function outputMenuItems(category_id) {
     let menu_item_section = document.getElementById("menu_items");
     let url = "api/menu_items";
