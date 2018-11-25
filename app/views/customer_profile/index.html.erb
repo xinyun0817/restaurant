@@ -1,0 +1,32 @@
+<div class="container col-md-6">
+  <h1 class="title">Personal Details</h1>
+
+  <div class="row justify-content-center">
+    <table class="table table-borderless">
+      <tr>
+        <th style="width: 40%">Name </th>
+        <td><%= @customer.name %></td>
+      </tr>
+
+      <tr>
+        <th>Address </th>
+        <td><%= @customer.address %></td>
+      </tr>
+    
+      <tr>
+        <th>Email </th>
+        <td><%= @customer.email %></td>
+      </tr>
+    
+      <tr>
+        <th>Contact Number </th>
+        <td><%= @customer.contact_number %></td>
+      </tr>
+    </table>
+  </div>
+  <br>
+  
+  <%= link_to 'Edit Profile', customer_profile_edit_path(@customer) %> 
+  <%= link_to 'Change Password', customer_profile_change_password_path(@customer) %> 
+  <%= link_to 'Back', orderings_path %>
+</div>

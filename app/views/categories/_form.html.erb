@@ -1,0 +1,36 @@
+<div class="box">
+  <%= form_with(model: category, local: true) do |form| %>
+    <% if category.errors.any? %>
+      <div id="error_explanation">
+        <ul class="alert alert-danger alert-dismissible fade show w-100">
+          <h3><%= pluralize(category.errors.count, "error") %> prohibited this customer from being saved:</h3>
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <% category.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <strong><%= form.label :category_name %></strong><br>
+      <%= form.text_field :category_name, required: true, :class =>"input" %>
+    </div>
+
+    <div class="field">
+      <strong><%= form.label :description %></strong><br>
+      <%= form.text_area :description, :class =>"input" %>
+    </div>
+    
+    <div class="field">
+      <strong><%= form.label :position %></strong><br>
+      <%= form.text_field :position, :class =>"input" %>
+    </div>
+    <br>
+
+    <div class="actions">
+      <%= form.submit "Save", :class => "btn btn-primary btn-submit" %>
+    </div>
+  
+  <% end %>
+</div>

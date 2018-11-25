@@ -1,0 +1,55 @@
+<div style="padding-left: 30px; padding-right: 30px;">
+  <h2>Order Confirmation</h2>
+  <hr>
+  <h2>Dear <%= @customer.name %>,</h2>
+  <p>Thank you for your order!</p>
+
+  <p>You have ordered the following :</p>
+  
+  <p style="font-weight: bold; font-size: 16px">Order Items (<%= @order.order_items.where(order_id: @order).count %>) :</p>
+  <table id="order-item">
+    <tr>
+      <th></th>
+      <th>Item</th>
+      <th>Quantity</th>
+      <th>Price (RM)</th>
+      <th>Sub Total (RM)</th>
+    </tr>
+    
+    <% total = 0.00 %>
+    <% @order.order_items.each do |order_item| %>
+    <% total += order_item.menu.price * order_item.quantity %>
+      <tr>
+        <td><%= image_tag order_item.menu.photo.variant(resize: "100x100") %></td>
+        <td class="special"><%= order_item.menu.item %></td>
+        <td><%= order_item.quantity %></td>
+        <td><%= sprintf("%.2f", order_item.menu.price) %></td>
+        <td><%= sprintf("%.2f", order_item.quantity * order_item.menu.price) %></td>
+      </tr>
+    <% end %>
+    <tr style="font-weight: bold;">
+        <td colspan="4" style="text-align: right">Grand Total</td>
+        <td><%= sprintf("%.2f", total) %></td>
+    </tr>
+  </table>
+  <br>
+  
+  <p style="font-weight: bold; font-size: 16px">Order Details :</p>
+  <table id="order-details">
+    <tr>
+      <th style="width: 15%">Order ID</th>
+      <th style="width: 20%">Order Date</th>
+      <th style="width: 40%">Delivery Address</th>
+      <th style="width: 25%">Contact Number</th>
+    </tr>
+    
+    <tr>
+      <td style="width: 15%"><%= @order.id %></td>
+      <td style="width: 20%"><%= @order.ordering_date %></td>
+      <td style="width: 40%" class="special"><%= @customer.address %></td>
+      <td style="width: 25%"><%= @customer.contact_number %></td>
+    </tr>
+  </table>
+  <br>
+
+</div>

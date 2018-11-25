@@ -1,0 +1,45 @@
+<div class="box">
+  <%= form_with(model: menu, local: true) do |form| %>
+    <% if menu.errors.any? %>
+      <div id="error_explanation">
+        <ul class="alert alert-danger alert-dismissible fade show w-100">
+          <h3><%= pluralize(menu.errors.count, "error") %> prohibited this customer from being saved:</h3>
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <% menu.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    
+    <div class="field">
+      <strong><%= form.label :photo %> : </strong><br>
+      <%= form.file_field :photo, :class =>"input" %>
+    </div>
+
+    <div class="field">
+      <strong><%= form.label :item %> : </strong><br>
+      <%= form.text_field :item, required: true, :class =>"input" %>
+    </div>
+
+    <div class="field">
+      <strong><%= form.label :price %> : </strong><br>
+      <%= form.text_field :price, required: true, :class =>"input" %>
+    </div>
+  
+    <div class="field">
+      <strong><%= form.label :category_id %> : </strong>
+      <%= form.select :category_id, Category.all.map { |category| [ category.category_name, category.id] }, include_blank: true, :class =>"input" %>
+    </div>
+    
+    <div class="field">
+      <strong><%= form.label :position %> : </strong><br>
+      <%= form.text_field :position, required: true, :class =>"input" %>
+    </div>
+    <br><br>
+
+    <div class="actions">
+      <%= form.submit "Save", :class => "btn btn-primary btn-submit" %>
+    </div>
+  <% end %>
+</div>

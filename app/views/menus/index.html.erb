@@ -1,0 +1,35 @@
+<h1>Menus</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th style="width: 20%"></th>
+      <th style="width: 20%">Item</th>
+      <th style="width: 10%; text-align: center;">Price (RM)</th>
+      <th style="width: 10%; text-align: center;">Category</th>
+      <th style="width: 10%; text-align: center;">Position</th>
+      <th style="width: 30%" colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @menus.each do |menu| %>
+      <tr>
+        <td style="width: 20%; text-align: center;"><%= image_tag menu.photo.variant(resize: "150x150") if menu.photo.attached? %></td>
+        <td style="width: 20%"><%= menu.item %></td>
+        <td style="width: 10%; text-align: center;"><%= two_decimals(menu.price) %></td>
+        <td style="width: 10%; text-align: center;"><%= menu.category.category_name %></td>
+        <td style="width: 10%; text-align: center;"><%= menu.position %></td>
+        <td style="width: 10%; text-align: center;"><%= link_to 'Show', menu %></td>
+        <td style="width: 10%; text-align: center;"><%= link_to 'Edit', edit_menu_path(menu) %></td>
+        <td style="width: 10%; text-align: center;"><%= link_to 'Destroy', menu, method: :delete, data: { confirm: 'Are you sure want to delete?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Menu', new_menu_path %>
+<br><br><br>
+

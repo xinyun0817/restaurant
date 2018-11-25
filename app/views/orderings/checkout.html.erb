@@ -1,0 +1,82 @@
+<div class="container">
+    <h1 class="title">Checkout Page</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th style="text-align: center">Order ID</th>
+                <th style="text-align: center">Order Date</th>
+                <th style="text-align: center">Name</th>
+                <th style="text-align: center">Phone</th>
+                <th style="text-align: center">Address</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="text-align: center"><%= @order.id %></td>
+                <td style="text-align: center"><%= @order.ordering_date %></td>
+                <td style="text-align: center"><%= @order.customer.name %></td>
+                <td style="text-align: center"><%= @order.customer.contact_number %></td>
+                <td style="text-align: center"><%= @order.customer.address %></td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <h4>Order Items ( <%= @order.order_items.count(params[:order_item])%> )</h4>
+    <%= form_tag update_quantities_order_order_items_path(@order), method: :patch do %>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th style="text-align: center; width: 10%"></th>
+                    <th style="text-align: center; width: 20%"></th>
+                    <th style="text-align: center; width: 20%">Menu Item</th>
+                    <th style="text-align: center; width: 20%">Menu Item Price</th>
+                    <th style="text-align: center; width: 15%">Order quantity</th>
+                    <th style="text-align: center; width: 15%">Sub Total</th>
+                </tr>
+            </thead>
+            
+            <% @order.order_items.each do |order_item| %>
+            <tbody>
+                <tr>
+                    <td style="width: 10%">
+                        <%= link_to '<i class="fa fa-times"></i>'.html_safe, delete_order_item_order_order_item_path(@order, order_item), data: {method: :delete}, class: "delete_btn_checkoutpage", title: "Delete", "data-toggle" => "tooltip" %>
+                    </td>
+                    <td style="text-align: center; width: 20%">
+                        <%= image_tag order_item.menu.photo.variant(resize: "80x80") %>
+                    </td>
+                    <td style="text-align: center; width: 20%">
+                        <%= order_item.menu.item %>
+                    </td>
+                    <td style="text-align: center; width: 20%">
+                        RM <%= two_decimals(order_item.menu.price) %>
+                    </td>
+                    <td style="text-align: center; width: 15%">
+                        <%= number_field_tag "order_item[#{order_item.id}][quantity]", order_item.quantity, max: 100, class: "quantity-input" %>
+                    </td>
+                    <td style="text-align: center; width: 15%">
+                        RM <%= two_decimals(order_item.quantity * order_item.menu.price) %>
+                    </td>
+                </tr>
+            </tbody>
+            <% end %>
+            
+            <tr style="background-color: gainsboro">
+                <td colspan="4"></td>
+                <td class="text-right total">Total :</td>
+                <td style="text-align: center" class="total"> RM <%= two_decimals(@order.total_amount) %></td>
+            </tr>    
+        </table>
+        
+        <div class="row mb-5">
+            <div>
+                <%= link_to "Continue Order", orderings_path, class: "btn-order" %>
+            </div>
+            <% if @order.order_items.present? %>
+            <div class="ml-auto">
+                <%= submit_tag "Update Quantities", class: "btn-update" %>
+                <%= link_to "Make payment", new_payment_path, class: "btn-payment" %>
+            </div>
+            <% end %>
+        </div>
+    <% end %>
+</div>

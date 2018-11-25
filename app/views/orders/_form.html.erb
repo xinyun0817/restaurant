@@ -1,0 +1,35 @@
+<div class="box">
+  <%= form_with(model: order, local: true) do |form| %>
+    <% if order.errors.any? %>
+      <div id="error_explanation">
+        <ul class="alert alert-danger alert-dismissible fade show w-100">
+          <h3><%= pluralize(order.errors.count, "error") %> prohibited this customer from being saved:</h3>
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <% order.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <strong><%= form.label :ordering_date %> : </strong><br>
+      <%= form.date_select :ordering_date, :class =>"input" %>
+    </div><br>
+
+    <div class="field">
+      <strong><%= form.label :customer_id %> : </strong><br>
+      <%= form.select :customer_id, Customer.order(:name).map { |customer| [ customer.name, customer.id ] }, include_blank: "Please select a customer" %>
+    </div><br>
+  
+    <div class="field">
+      <strong><%= form.label :remark %> : </strong><br>
+      <%= form.text_area :remark, :class =>"input" %>
+    </div>
+    <br>
+
+    <div class="actions">
+      <%= form.submit "Save", :class => "btn btn-primary btn-submit" %>
+    </div>
+  <% end %>
+</div>

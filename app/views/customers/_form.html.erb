@@ -1,0 +1,40 @@
+<div class="box">
+  <%= form_with(model: customer, local: true) do |form| %>
+    <% if customer.errors.any? %>
+      <div id="error_explanation">
+        <ul class="alert alert-danger alert-dismissible fade show w-100">
+          <h3><%= pluralize(customer.errors.count, "error") %> prohibited this customer from being saved:</h3>
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <% customer.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <strong><%= form.label :name %> : </strong><br>
+      <%= form.text_field :name, :class =>"input" %>
+    </div>
+
+    <div class="field">
+      <strong><%= form.label :address %> : </strong><br>
+      <%= form.text_area :address, :class =>"input" %>
+    </div>
+
+    <div class="field">
+      <strong><%= form.label :email %> : </strong><br>
+      <%= form.text_field :email, :class =>"input" %>
+    </div>
+
+    <div class="field">
+      <strong><%= form.label :contact_number %> : </strong><br>
+      <%= form.text_field :contact_number, :class =>"input" %>
+    </div>
+    <br>
+
+    <div class="actions">
+      <%= form.submit "Save", :class => "btn btn-primary btn-submit" %>
+    </div>
+  <% end %>
+</div>

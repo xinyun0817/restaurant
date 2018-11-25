@@ -1,0 +1,24 @@
+<h1 class="title">Forgotten Password</h1>
+
+<div class="row justify-content-center">
+  <%= form_tag "/forgotten_password/create", :class =>"col-md-5 p-5 mt-2" do %>
+    <% if flash[:alert].present? %>
+        <p class="alert alert-danger alert-dismissible fade show">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <%= flash[:alert] %>
+        </p>
+    <% end %>
+    
+    <p>Please enter the email address you used to register with My Food and we'll email you a link to reset your password.</p>
+    <br>
+    
+    <strong><label>Email :</label></strong><br>
+    <p><%= text_field_tag "email" %></p><br>
+  
+    <div>
+      <%= submit_tag "Reset Password", :class =>"btn-save-changes" %>
+    </div>
+    <br>
+
+  <% end %>
+</div>

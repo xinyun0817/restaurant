@@ -1,0 +1,17 @@
+<h1>Admin Details</h1>
+
+<div class="box">
+  <p>
+    <strong>Name :</strong>
+    <%= @admin.name %>
+  </p>
+
+  <p>
+    <strong>Email :</strong>
+    <%= @admin.email %>
+  </p>
+
+</div><br>
+
+<%= link_to 'Edit', edit_admin_path(@admin) %> |
+<%= link_to 'Back', admins_path %>

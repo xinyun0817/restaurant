@@ -1,0 +1,40 @@
+<div class="container">
+    <h1 class="title">Payment</h1>
+    
+    <div class="row justify-content-center">
+    <%= form_tag payment_index_path, :class =>"col-md-7 p-4" do %>
+        <table class="table table-borderless">
+            <tr>
+                <th>Total Amount</th>
+                <th>RM <%= two_decimals(@order.total_amount) %></th>
+            </tr>
+            <tr>
+                <th>Credit Card Type</th>
+                <td><%= text_field_tag "card_type" %></td>
+            </tr>
+            <tr>
+                <th>Card Number</th>
+                <td><%= text_field_tag "card_no" %></td>
+            </tr>
+            <tr>
+                <th>Name on Card</th>
+                <td><%= text_field_tag "name_on_card" %></td>
+            </tr>
+            <tr>
+                <th>Expiry Date</th>
+                <td><%= select_date(date = Date.today) %></td>
+            </tr>
+            <tr>
+                <th>CV Code</th>
+                <td><%= text_field_tag "cv_code" %></td>
+            </tr>
+            <tr>
+                <th></th>
+                <td><%= submit_tag "Confirm Payment", class: "btn-pay" %></td>
+            </tr>
+        </table>
+    <% end %>
+    </div>
+</div>
+
+

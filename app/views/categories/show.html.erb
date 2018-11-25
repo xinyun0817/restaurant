@@ -1,0 +1,45 @@
+<h1>Category Details</h1>
+
+<div class="box">
+  <p>
+    <strong>Category name :</strong>
+    <%= @category.category_name %>
+  </p>
+
+  <p>
+    <strong>Description :</strong>
+    <%= @category.description %>
+  </p>
+  
+  <p>
+    <strong>Position :</strong>
+    <%= @category.position %>
+  </p>
+  
+  <table class="table">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Item</th>
+        <th style="text-align: center">Price</th>
+      </tr>
+    </thead>
+    
+    <% @menus.each do |menu| %>
+      <tbody>
+        <tr>
+          <td style="text-align: center"><%= image_tag menu.photo.variant(resize: "100x100") %></td>
+          <td><%= menu.item %></td>
+          <td style="text-align: center"><%= two_decimals(menu.price) %></td>
+        </tr>
+      </tbody>
+    <% end %>
+  </table>
+  
+</div><br>
+
+<%= link_to 'Edit', edit_category_path(@category) %> |
+<%= link_to 'Back', categories_path %>
+
+
+

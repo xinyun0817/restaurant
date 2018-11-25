@@ -1,0 +1,48 @@
+<h1 class="title">Editing Profile</h1>
+
+<div class="row justify-content-center">
+  <%= form_with scope: :customer, url: "/customer_profile/update?id=#{@customer.id}", method: :patch, local: true, class: "col-md-5 p-5 mt-2" do |form| %>
+    <% if @customer.errors.any? %>
+      <div id="error_explanation">
+        <ul class="alert alert-danger alert-dismissible fade show w-100">
+          <h3><%= pluralize(@customer.errors.count, "error") %> prohibited this customer from being saved:</h3>
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <% @customer.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  
+    <div class="field">
+      <strong><%= form.label :name %> : </strong><br>
+      <%= form.text_field :name, :class =>"customer-input" %>
+    </div>
+
+    <div class="field">
+      <strong><%= form.label :address %> : </strong><br>
+      <%= form.text_area :address, :class =>"customer-input" %>
+    </div>
+
+    <div class="field">
+      <strong><%= form.label :email %> : </strong><br>
+      <%= form.text_field :email, :class =>"customer-input" %>
+    </div>
+
+    <div class="field">
+      <strong><%= form.label :contact_number %> : </strong><br>
+      <%= form.text_field :contact_number, :class =>"customer-input" %>
+    </div>
+    <br>
+
+    <div class="actions row">
+      <div class="col-md-6">
+        <%= form.submit "Save Changes", class: "btn-save-changes" %>
+      </div>
+      <div class="col-md-6">
+        <%= link_to "Cancel", customer_profile_index_path, class: "btn-cancel btn-block" %>
+      </div>
+    </div>
+  <% end %>
+</div>
+<br>

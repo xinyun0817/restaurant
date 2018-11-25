@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My Food</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alfa Slab One">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" 
+    integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-sm fixed-top">
+    
+      <a class="navbar-brand" href="<%= admins_path %>" id="myCategory">
+        <i class="fa fa-user-circle ml-2 mr-2" style="font-size: 30px;"></i>
+        <span style="font-weight: bold; font-size: 32px;"> My Food</span>
+      </a>
+    
+      <form class="form-inline" action="/action_page.php">
+        <input class="form-control mr-sm-3" type="text" placeholder="Type here to search" size="40">
+        <button class="btn btn-outline-light" type="submit"><i class='fa fa-search' style="font-size: 20px;"></i></button>
+      </form>
+      
+      <div style="color: white" class="ml-auto">
+        Hello, <%= current_admin.name %> 
+        <%= link_to "Log Out", "/admin/logout",  data: {method: :delete}, style: "color: white" %>
+      </div>
+        
+    </nav>
+   
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-2">
+          <div class="list-group sticky">
+            <div class="list-group-item font-weight-bold <%= active_if("admins") %>"><%= link_to "All Admins ( #{ total_admin } )", admins_path %></div> 
+            <div class="list-group-item font-weight-bold <%= active_if("customers") %>"><%= link_to "All Customers ( #{ total_customer } )", customers_path %></div>
+            <div class="list-group-item font-weight-bold <%= active_if("categories") %>"><%= link_to "All Categories ( #{ total_category } )", categories_path %></div>
+            <div class="list-group-item font-weight-bold <%= active_if("menus") %>"><%= link_to "All Menus ( #{ total_menu } )", menus_path %></div>
+            <div class="list-group-item font-weight-bold <%= active_if("orders") %>"><%= link_to "All Orders ( #{ total_order } )", orders_path %></div>
+          </div>
+        </div>
+          
+        <div class="col-md-10">
+          <% if flash[:success].present? %>
+            <p class="alert alert-success alert-dismissible fade show">
+              <button type="button" class="close" data-dismiss="alert">&times;</button>
+              <%= flash[:success] %>
+            </p>
+          <% end %>
+      
+          <% if flash[:alert].present? %>
+            <p class="alert alert-danger alert-dismissible fade show">
+              <button type="button" class="close" data-dismiss="alert">&times;</button>
+              <%= flash[:alert] %>
+            </p>
+          <% end %>
+      
+          <% if flash[:notice].present? %>
+            <p class="alert alert-success alert-dismissible fade show">
+              <button type="button" class="close" data-dismiss="alert">&times;</button>
+              <%= flash[:notice] %>
+            </p>
+          <% end %>
+    
+          <%= yield %>
+    
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

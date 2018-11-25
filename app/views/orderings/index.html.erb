@@ -1,0 +1,101 @@
+<div class="container-fluid">
+    <div class="row">
+        
+    <!-- Sidebar -->
+    <div class="col-md-3">
+        <div class="list-group sticky">
+            <% @categories.each do |category| %>
+            <div class="list-group-item <%= is_active?("/orderings?category_id=#{category.id}") %>">
+                <%= link_to category.category_name, "#", class: "filtering_by_category", data: { category_id: category.id} %>
+                (<%= category.menus.count %>)
+                <i class="fa fa-angle-right float-right"></i>
+            </div>
+            <% end %>
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        <!--Session ID: <%#= session[:order_id] %>-->
+        <% if params[:category_id] %>
+            <div class="bg-primary category-name">
+                <%= @categories.find_by(id: params[:category_id]).category_name %>
+                (<%= @menus.count %>)
+            </div>
+        <% else %>
+            <div class="bg-primary category-name">Menu</div>
+        <% end %>
+        <table class="table table-striped">
+            <thead>
+                    <th style="width: 30%"></th>
+                    <th style="width: 30%">Item</th>
+                    <th style="width: 15%; text-align: center">Price (RM)</th>
+                    <th style="width: 15%; text-align: center">Quantity</th>
+                    <th style="width: 10%"></th>
+                </tr>
+            </thead>
+            <tbody id="menu_items">
+                <!--<%# @menus.each do |menu| %>-->
+                <!--    <%#= form_tag "/orderings/order" do %>-->
+                <!--        <%#= hidden_field_tag "menu_id", menu.id %>-->
+                <!--        <tr>-->
+                <!--            <td style="width: 30%; text-align: center"><%#= image_tag menu.photo.variant(resize: "150x150") %></td>-->
+                <!--            <td style="width: 30%"><%#= menu.item %></td>-->
+                <!--            <td style="width: 10%; text-align: center"><%#= two_decimals(menu.price) %></td>-->
+                <!--            <td style="width: 15%"><%#= number_field_tag "quantity", "1", min: 1, max: 100, class: "quantity-input" %></td>-->
+                <!--            <td style="width: 15%"><%#= submit_tag "Add", class: "btn-add" %></td>-->
+                <!--        </tr>-->
+                <!--    <#% end %>-->
+                <!--<#% end %>-->
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="col-md-3">
+        <div class="sticky block" style="border: 1px solid gainsboro">
+            <div class="text-center p-2" style="background-color: #f0f0f0">
+                <span style="width:65%; font-size: 20px" class="font-weight-bold">Your Order</span>
+                <span style="width:35%" class="ml-5"><i class="fa fa-cart-plus" style="font-size: 25px"></i></span>
+            </div>
+            
+            <table class="table special_table table-wrapper-scroll-y">
+                <!--<%# if @order %>-->
+                <!--<%# @order.order_items.each do |order_item| %>-->
+                    <tbody id="order_items">
+                <!--        <td style="width: 8%">-->
+                <!--            <ul>-->
+                <!--                <li><%#= link_to '<i class="fa fa-plus"></i>'.html_safe,  order_order_item_path(@order, order_item), data: {method: :patch}, class: "plus_minus_btn" %></li>-->
+                <!--                <li class="font-weight-bold text-center pl-1"><%#= order_item.quantity %></li>-->
+                <!--                <li><%#= link_to '<i class="fa fa-minus"></i>'.html_safe, order_order_item_path(@order, order_item), data: {method: :delete}, class: "plus_minus_btn" %></li>-->
+                <!--            </ul>      -->
+                <!--        </td>-->
+                            
+                <!--        <td style="width:13%"><%#= image_tag order_item.menu.photo.variant(resize: "50x50") %></td>-->
+                <!--        <td style="width:44%; font-size: 14px">-->
+                <!--            <%#= order_item.menu.item %><br>-->
+                <!--            <span>- RM <%#= two_decimals(order_item.menu.price) %></span>-->
+                <!--        </td>-->
+                            
+                <!--        <td style="width:35%">-->
+                <!--            <span class="font-weight-bold float-right", style="font-size: 14px">RM <%#= two_decimals(order_item.menu.price * order_item.quantity) %></span><br>-->
+                <!--            <%#= link_to '<i class="fa fa-times"></i>'.html_safe, delete_order_item_order_order_item_path(@order, order_item), data: {method: :delete}, class: "delete_btn" %>-->
+                <!--        </td>-->
+                    </tbody>
+                <!--<%# end %>-->
+                <!--<%# end %>-->
+            </table>
+
+            <div id="total_price">
+                <div id="message"></div>
+            </div>
+            
+            <% if @order && @order.order_items.present? %>
+                <%= link_to "Checkout", checkout_orderings_path, class: "btn-checkout text-center mt-4" %>
+            <% else %>
+                <div class="text-center font-weight-bold">You have no orders yet.</div>
+            <% end %>
+        </div>
+    </div>
+</div>
+      
+        
+  

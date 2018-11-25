@@ -1,0 +1,16 @@
+<h1 style="color: DeepSkyBlue">Congratulations!</h1>
+<h1>You have registered successfully in My Food.</h1>
+<br>
+
+<div>       
+  <%= image_tag "page.png", class: "image" %>
+      
+  <p>Hi, <%= @customer.name %>. Thank you for registering at My Food. We are very excited to have you here with us.</p>
+  <p>My Food is an online food ordering website. Our mission is to bring conveniences to hungry diners by providing the reliable delivery service.</p>
+  <p>Feel HUNGRY? You can now login to our website and start your ordering!</p>
+  <p>If you have any questions regarding our food ordering system, please call us at 012-3456789 or you can send email to myfood@gmail.com</p>
+  <br>
+  
+  <p class="parent"><%= link_to "Log in to My Food website", login_url, class: "button" %></p><br>
+      
+</div>

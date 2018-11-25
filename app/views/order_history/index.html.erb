@@ -1,0 +1,30 @@
+<div class="container" data-turbolinks="false">
+    <div class="row justify-content-center">
+        <h1 class="title">Order History</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th style="width: 20%; text-align: center">Order ID</th>
+                    <th style="width: 20%; text-align: center">Order Date</th>
+                    <th style="width: 20%; text-align: center">Total Price</th>
+                    <th style="width: 20%; text-align: center">Order Status</th>
+                    <th style="width: 20%; text-align: center"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% @order.each do |order| %>
+                    <tr>
+                        <td style="width: 20%; text-align: center"><%= order.id %></td>
+                        <td style="width: 20%; text-align: center"><%= order.ordering_date %></td>
+                        <td style="width: 20%; text-align: center">RM <%= two_decimals(order.total_amount) %></td>
+                        <td style="width: 20%; text-align: center">Completed</td>
+                        <td style="width: 20%; text-align: center"><%= link_to "View Details", order_history_path(order.id), class: "btn-view-details" %></td>
+                    </tr>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
+    <br>
+    <%= link_to "Back", orderings_path %>
+    <br><br>
+</div>

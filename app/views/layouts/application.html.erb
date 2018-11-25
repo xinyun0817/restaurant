@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My Food</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alfa Slab One">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" 
+    integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-sm fixed-top">
+    
+      <a class="navbar-brand" href="<%= orderings_path %>" id="myCategory">
+        <i class="fa fa-utensils ml-2 mr-2" style="font-size: 30px;"></i>
+        <span style="font-weight: bold; font-size: 32px;"> My Food</span>
+      </a>
+    
+      <form class="form-inline ml-5" action="/action_page.php">
+        <input class="form-control mr-sm-3" type="text" placeholder="Type here to search" size="50">
+        <button class="btn btn-outline-light" type="submit"><i class='fa fa-search' style="font-size: 20px;"></i></button>
+      </form>
+      
+     
+      <div style="color: white" class="ml-auto">
+        <% if session[:customer_id].present? %>
+          <%= link_to '<i class="fa fa-home"></i>'.html_safe, orderings_path, class: "white pr-3" %>
+          Hello, <%= current_user.name %>
+          <span class="<%= active_if("customer_profile") %>"><%= link_to "My Account", customer_profile_index_path, style: "color: white" %></span>
+          <span class="<%= active_if("order_history") %>"><%= link_to "My Orders", order_history_index_path, style: "color: white" %></span>
+          <%= link_to "Log Out", "/logout",  data: {method: :delete}, style: "color: white" %>
+        <% else %>
+          <%= link_to "Log In", login_path, style: "color: white" %>
+          <%= link_to "Register", register_path, style: "color: white" %>
+        <% end %>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <% if flash[:alert].present? %>
+        <p class="alert alert-danger alert-dismissible fade show text-center">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <%= flash[:alert] %>
+        </p>
+      <% elsif flash[:notice].present? %>
+        <p class="alert alert-success alert-dismissible fade show text-center">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <%= flash[:notice] %>
+        </p>
+      <% end %>
+      
+      <div id="flash_messages"></div>
+    
+      <%= yield %>
+    </div>
+  </body>
+</html>
+  
+ 
+
